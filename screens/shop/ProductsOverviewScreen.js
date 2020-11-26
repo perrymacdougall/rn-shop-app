@@ -1,10 +1,11 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import ProductItem from '../../components/shop/ProductItem';
 
-const ProductsOverviewScreen = (props) => {
+const ProductsOverviewScreen = ({ navigation }) => {
   const products = useSelector((state) => state.products.availableProducts);
   return (
     <FlatList
@@ -16,13 +17,18 @@ const ProductsOverviewScreen = (props) => {
           title={itemData.item.title}
           price={itemData.item.price}
           onViewDetail={() => {
-            props.navigation.navigate('Detail');
+            navigation.navigate('Detail');
           }}
           onAddToCart={() => {}}
         />
       )}
     />
   );
+};
+
+ProductsOverviewScreen.propTypes = {
+  navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired })
+    .isRequired,
 };
 
 export default ProductsOverviewScreen;
