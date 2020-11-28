@@ -7,15 +7,27 @@ import {
   Image,
   Button,
 } from 'react-native';
+import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
-const ProductDetailScreen = (props) => {
+const styles = StyleSheet.create({});
+
+const ProductDetailScreen = ({ navigation, route }) => {
+  const { productId } = route.params;
+  const selectedProduct = useSelector((state) =>
+    state.products.availableProducts.find((prod) => prod.id === productId)
+  );
+
   return (
     <View>
-      <Text>The Product Detail Screen</Text>
+      <Text>{selectedProduct.title}</Text>
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+ProductDetailScreen.propTypes = {
+  navigation: PropTypes.shape().isRequired,
+  route: PropTypes.shape().isRequired,
+};
 
 export default ProductDetailScreen;
