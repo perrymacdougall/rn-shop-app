@@ -1,5 +1,14 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, Button } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Button,
+  TouchableOpacity,
+  TouchableNativeFeedback,
+  Platform,
+} from 'react-native';
 import PropTypes from 'prop-types';
 
 import Colors from '../../constants/Colors';
@@ -15,6 +24,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     height: 300,
     margin: 20,
+    overflow: 'hidden',
   },
   imageContainer: {
     width: '100%',
@@ -50,23 +60,36 @@ const styles = StyleSheet.create({
 });
 
 const ProductItem = ({ image, title, price, onViewDetail, onAddToCart }) => {
+  let TouchableCmp = TouchableOpacity;
+
+  if (Platform.OS === 'android' && Platform.Version >= 21) {
+    TouchableCmp = TouchableNativeFeedback;
+  }
   return (
     <View style={styles.product}>
-      <View style={styles.imageContainer}>
-        <Image style={styles.image} source={{ uri: image }} />
-      </View>
-      <View style={styles.details}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.price}>${price.toFixed(2)}</Text>
-      </View>
-      <View style={styles.actions}>
-        <Button
-          color={Colors.primary}
-          title="View Details"
-          onPress={onViewDetail}
-        />
-        <Button color={Colors.primary} title="To Cart" onPress={onAddToCart} />
-      </View>
+      <TouchableCmp onPress={onViewDetail} useForeground>
+        <View>
+          <View style={styles.imageContainer}>
+            <Image style={styles.image} source={{ uri: image }} />
+          </View>
+          <View style={styles.details}>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.price}>${price.toFixed(2)}</Text>
+          </View>
+          <View style={styles.actions}>
+            <Button
+              color={Colors.primary}
+              title="View Details"
+              onPress={onViewDetail}
+            />
+            <Button
+              color={Colors.primary}
+              title="To Cart"
+              onPress={onAddToCart}
+            />
+          </View>
+        </View>
+      </TouchableCmp>
     </View>
   );
 };

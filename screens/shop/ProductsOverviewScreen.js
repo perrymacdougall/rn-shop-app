@@ -17,7 +17,10 @@ const ProductsOverviewScreen = ({ navigation }) => {
           title={itemData.item.title}
           price={itemData.item.price}
           onViewDetail={() => {
-            navigation.navigate('Detail');
+            navigation.navigate('Details', {
+              productId: itemData.item.id,
+              productTitle: itemData.item.title,
+            });
           }}
           onAddToCart={() => {}}
         />
