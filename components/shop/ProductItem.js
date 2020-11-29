@@ -24,7 +24,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     height: 300,
     margin: 20,
+  },
+  touchable: {
     overflow: 'hidden',
+    borderRadius: 10,
   },
   imageContainer: {
     width: '100%',
@@ -67,29 +70,31 @@ const ProductItem = ({ image, title, price, onViewDetail, onAddToCart }) => {
   }
   return (
     <View style={styles.product}>
-      <TouchableCmp onPress={onViewDetail} useForeground>
-        <View>
-          <View style={styles.imageContainer}>
-            <Image style={styles.image} source={{ uri: image }} />
+      <View style={styles.touchable}>
+        <TouchableCmp onPress={onViewDetail} useForeground>
+          <View>
+            <View style={styles.imageContainer}>
+              <Image style={styles.image} source={{ uri: image }} />
+            </View>
+            <View style={styles.details}>
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.price}>${price.toFixed(2)}</Text>
+            </View>
+            <View style={styles.actions}>
+              <Button
+                color={Colors.primary}
+                title="View Details"
+                onPress={onViewDetail}
+              />
+              <Button
+                color={Colors.primary}
+                title="To Cart"
+                onPress={onAddToCart}
+              />
+            </View>
           </View>
-          <View style={styles.details}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.price}>${price.toFixed(2)}</Text>
-          </View>
-          <View style={styles.actions}>
-            <Button
-              color={Colors.primary}
-              title="View Details"
-              onPress={onViewDetail}
-            />
-            <Button
-              color={Colors.primary}
-              title="To Cart"
-              onPress={onAddToCart}
-            />
-          </View>
-        </View>
-      </TouchableCmp>
+        </TouchableCmp>
+      </View>
     </View>
   );
 };
