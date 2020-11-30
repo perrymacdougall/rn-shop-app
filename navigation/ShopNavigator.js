@@ -23,12 +23,20 @@ const ShopNavigator = () => {
         <Stack.Screen
           name="Products"
           component={ProductsOverviewScreen}
-          options={{ title: 'All Products' }}
+          options={{
+            title: 'All Products',
+            headerTitleStyle: { fontFamily: 'open-sans-bold' },
+            headerBackTitleStyle: { fontFamily: 'open-sans' },
+          }}
         />
         <Stack.Screen
           name="Details"
           component={ProductDetailScreen}
-          options={({ route }) => ({ title: route.params.productTitle })}
+          options={({ route }) => ({
+            title: route.params.productTitle,
+            headerTitleStyle: { fontFamily: 'open-sans-bold' },
+            headerBackTitleStyle: { fontFamily: 'open-sans' },
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>
