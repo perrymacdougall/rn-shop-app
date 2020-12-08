@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Platform, Button } from 'react-native';
+import { FlatList, Platform } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
@@ -18,7 +18,7 @@ const ProductsOverviewScreen = ({ navigation }) => {
         <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
           <Item
             title="Cart"
-            iconName="ion-ios-cart-outline"
+            iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
             onPress={() => {}}
           />
         </HeaderButtons>
@@ -51,8 +51,10 @@ const ProductsOverviewScreen = ({ navigation }) => {
 };
 
 ProductsOverviewScreen.propTypes = {
-  navigation: PropTypes.shape({ navigate: PropTypes.func.isRequired })
-    .isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    setOptions: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default ProductsOverviewScreen;
