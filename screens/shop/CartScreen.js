@@ -27,20 +27,42 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   amount: {
-    color: Colors.accent,
+    color: Colors.primary,
   },
 });
 
 const CartScreen = (props) => {
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
+  const cartItems = useSelector((state) => {
+    // const transformedCartItems = [];
+    // for (const key in state.cart.items) {
+    // //   if (Object.prototype.hasOwnProperty.call(state.cart.items, key)) {
+    //     transformedCartItems.push({
+    //       productId: key,
+    //       productTitle: state.cart.items[key].productTitle,
+    //       productPrice: state.cart.items[key].productPrice,
+    //       quantity: state.cart.items[key].quantity,
+    //       sum: state.cart.items[key].sum,
+    //     });
+    // //   }
+    // }
+    // return transformedCartItems;
+    const transformedCartItems = Object.entries(state.cart.items);
+    console.log(transformedCartItems);
+  });
 
   return (
     <View style={styles.screen}>
       <View style={styles.summary}>
         <Text style={styles.summaryText}>
-          Total: <Text style={styles.amount}>${cartTotalAmount}</Text>
+          Total:{' '}
+          <Text style={styles.amount}>${cartTotalAmount.toFixed(2)}</Text>
         </Text>
-        <Button title="Order Now" />
+        <Button
+          color={Colors.accent}
+          title="Order Now"
+          disabled={cartItems.length === 0}
+        />
       </View>
       <View>
         <Text>CART ITEMS</Text>
