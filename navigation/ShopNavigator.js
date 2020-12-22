@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen';
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
+import CartScreen from '../screens/shop/CartScreen';
 import Colors from '../constants/Colors';
 
 const Stack = createStackNavigator();
@@ -37,6 +38,15 @@ const ShopNavigator = () => {
             headerTitleStyle: { fontFamily: 'open-sans-bold' },
             headerBackTitleStyle: { fontFamily: 'open-sans' },
           })}
+        />
+        <Stack.Screen
+          name="Cart"
+          component={CartScreen}
+          options={{
+            title: 'Cart',
+            headerTitleStyle: { fontFamily: 'open-sans-bold' },
+            headerBackTitleStyle: { fontFamily: 'open-sans' },
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
