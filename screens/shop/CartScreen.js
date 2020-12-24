@@ -36,20 +36,9 @@ const CartScreen = (props) => {
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
   const cartItems = useSelector((state) => {
     const transformedCartItems = [];
-    // for (const key in state.cart.items) {
-    // //   if (Object.prototype.hasOwnProperty.call(state.cart.items, key)) {
-    //     transformedCartItems.push({
-    //       productId: key,
-    //       productTitle: state.cart.items[key].productTitle,
-    //       productPrice: state.cart.items[key].productPrice,
-    //       quantity: state.cart.items[key].quantity,
-    //       sum: state.cart.items[key].sum,
-    //     });
-    // //   }
-    // }
-    // return transformedCartItems;
     const receivedCartItems = Object.entries(state.cart.items);
-    for (const [key, value] of receivedCartItems) {
+
+    receivedCartItems.forEach(([key, value]) => {
       transformedCartItems.push({
         productId: key,
         productTitle: value.productTitle,
@@ -57,7 +46,7 @@ const CartScreen = (props) => {
         quantity: value.quantity,
         sum: value.sum,
       });
-    }
+    });
     return transformedCartItems;
   });
 
