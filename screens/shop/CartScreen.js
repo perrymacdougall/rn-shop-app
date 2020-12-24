@@ -49,7 +49,7 @@ const CartScreen = (props) => {
     // }
     // return transformedCartItems;
     const receivedCartItems = Object.entries(state.cart.items);
-    for (const [key, value] in receivedCartItems) {
+    for (const [key, value] of receivedCartItems) {
       transformedCartItems.push({
         productId: key,
         productTitle: value.productTitle,

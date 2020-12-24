@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   mainText: {
-    fontFamily: 'open-sanas-bold',
+    fontFamily: 'open-sans-bold',
     fontSize: 16,
   },
   deleteButton: {
@@ -57,7 +57,7 @@ const CartItem = ({ quantity, title, amount, onRemove }) => {
 };
 
 CartItem.propTypes = {
-  quantity: PropTypes.string.isRequired,
+  quantity: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   amount: PropTypes.number.isRequired,
   onRemove: PropTypes.func.isRequired,
