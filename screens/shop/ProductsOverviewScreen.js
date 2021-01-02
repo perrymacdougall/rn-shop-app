@@ -14,6 +14,17 @@ const ProductsOverviewScreen = ({ navigation }) => {
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
+      headerLeft: () => (
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item
+            title="Orders"
+            iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+            onPress={() => {
+              navigation.navigate('Orders');
+            }}
+          />
+        </HeaderButtons>
+      ),
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
           <Item
