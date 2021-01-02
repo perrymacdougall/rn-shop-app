@@ -14,6 +14,17 @@ const ProductsOverviewScreen = ({ navigation }) => {
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
+      headerLeft: () => (
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item
+            title="Menu"
+            iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
+            onPress={() => {
+              navigation.toggleDrawer();
+            }}
+          />
+        </HeaderButtons>
+      ),
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
           <Item
