@@ -17,10 +17,10 @@ const ProductsOverviewScreen = ({ navigation }) => {
       headerLeft: () => (
         <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
           <Item
-            title="Orders"
-            iconName={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+            title="Menu"
+            iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
             onPress={() => {
-              navigation.navigate('Orders');
+              navigation.toggleDrawer();
             }}
           />
         </HeaderButtons>

@@ -18,17 +18,8 @@ const defaultNavOptions = {
   headerStyle: {
     backgroundColor: Platform.OS === 'android' ? Colors.primary : '',
   },
-};
-
-const ShopNavigator = () => {
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator screenOptions={defaultNavOptions}>
-        <Drawer.Screen name="Products" component={ProductsNavigator} />
-        <Drawer.Screen name="Orders" component={OrdersNavigator} />
-      </Drawer.Navigator>
-    </NavigationContainer>
-  );
+  headerTitleStyle: { fontFamily: 'open-sans-bold' },
+  headerBackTitleStyle: { fontFamily: 'open-sans' },
 };
 
 const ProductsNavigator = () => {
@@ -39,8 +30,6 @@ const ProductsNavigator = () => {
         component={ProductsOverviewScreen}
         options={{
           title: 'All Products',
-          headerTitleStyle: { fontFamily: 'open-sans-bold' },
-          headerBackTitleStyle: { fontFamily: 'open-sans' },
         }}
       />
       <Stack.Screen
@@ -48,17 +37,13 @@ const ProductsNavigator = () => {
         component={ProductDetailScreen}
         options={({ route }) => ({
           title: route.params.productTitle,
-          headerTitleStyle: { fontFamily: 'open-sans-bold' },
-          headerBackTitleStyle: { fontFamily: 'open-sans' },
         })}
       />
       <Stack.Screen
         name="Cart"
         component={CartScreen}
         options={{
-          title: 'Cart',
-          headerTitleStyle: { fontFamily: 'open-sans-bold' },
-          headerBackTitleStyle: { fontFamily: 'open-sans' },
+          title: 'Your Cart',
         }}
       />
     </Stack.Navigator>
@@ -72,12 +57,24 @@ const OrdersNavigator = () => {
         name="Orders"
         component={OrdersScreen}
         options={{
-          title: 'Orders',
-          headerTitleStyle: { fontFamily: 'open-sans-bold' },
-          headerBackTitleStyle: { fontFamily: 'open-sans' },
+          title: 'Your Orders',
         }}
       />
     </Stack.Navigator>
+  );
+};
+
+const ShopNavigator = () => {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator
+        initialRouteName={ProductsNavigator}
+        drawerContentOptions={{ activeTintColor: Colors.primary }}
+      >
+        <Drawer.Screen name="Products" component={ProductsNavigator} />
+        <Drawer.Screen name="Orders" component={OrdersNavigator} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 };
 
