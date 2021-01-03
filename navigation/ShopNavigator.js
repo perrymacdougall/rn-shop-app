@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen';
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
@@ -71,8 +72,32 @@ const ShopNavigator = () => {
         initialRouteName={ProductsNavigator}
         drawerContentOptions={{ activeTintColor: Colors.primary }}
       >
-        <Drawer.Screen name="Products" component={ProductsNavigator} />
-        <Drawer.Screen name="Orders" component={OrdersNavigator} />
+        <Drawer.Screen
+          name="Products"
+          component={ProductsNavigator}
+          options={{
+            drawerIcon: ({ color }) => (
+              <Ionicons
+                name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
+                size={23}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Orders"
+          component={OrdersNavigator}
+          options={{
+            drawerIcon: ({ color }) => (
+              <Ionicons
+                name={Platform.OS === 'android' ? 'md-list' : 'ios-list'}
+                size={23}
+                color={color}
+              />
+            ),
+          }}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
