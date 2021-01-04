@@ -1,4 +1,5 @@
 import { ADD_TO_CART, REMOVE_FROM_CART } from '../actions/cart';
+import { ADD_ORDER } from '../actions/orders';
 import CartItem from '../../models/cart-item';
 
 const initialState = {
@@ -56,5 +57,7 @@ export default (state = initialState, action) => {
       };
     default:
       return state;
+    case ADD_ORDER:
+      return initialState;
   }
 };
