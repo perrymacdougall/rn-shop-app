@@ -1,5 +1,6 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Platform } from 'react-native';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
@@ -50,6 +51,12 @@ const UserProductsScreen = ({ navigation }) => {
       )}
     />
   );
+};
+
+UserProductsScreen.propTypes = {
+  navigation: PropTypes.shape({
+    setOptions: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default UserProductsScreen;

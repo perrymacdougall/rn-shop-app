@@ -4,14 +4,11 @@ import {
   Text,
   Image,
   StyleSheet,
-  Button,
   TouchableOpacity,
   TouchableNativeFeedback,
   Platform,
 } from 'react-native';
 import PropTypes from 'prop-types';
-
-import Colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   product: {
@@ -64,7 +61,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const ProductItem = ({ image, title, price, onViewDetail, onAddToCart }) => {
+const ProductItem = ({ image, title, price, onSelect, children }) => {
   let TouchableCmp = TouchableOpacity;
 
   if (Platform.OS === 'android' && Platform.Version >= 21) {
@@ -73,7 +70,7 @@ const ProductItem = ({ image, title, price, onViewDetail, onAddToCart }) => {
   return (
     <View style={styles.product}>
       <View style={styles.touchable}>
-        <TouchableCmp onPress={onViewDetail} useForeground>
+        <TouchableCmp onPress={onSelect} useForeground>
           <View>
             <View style={styles.imageContainer}>
               <Image style={styles.image} source={{ uri: image }} />
@@ -82,18 +79,7 @@ const ProductItem = ({ image, title, price, onViewDetail, onAddToCart }) => {
               <Text style={styles.title}>{title}</Text>
               <Text style={styles.price}>${price.toFixed(2)}</Text>
             </View>
-            <View style={styles.actions}>
-              <Button
-                color={Colors.primary}
-                title="View Details"
-                onPress={onViewDetail}
-              />
-              <Button
-                color={Colors.primary}
-                title="To Cart"
-                onPress={onAddToCart}
-              />
-            </View>
+            <View style={styles.actions}>{children}</View>
           </View>
         </TouchableCmp>
       </View>
@@ -105,8 +91,8 @@ ProductItem.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  onViewDetail: PropTypes.func.isRequired,
-  onAddToCart: PropTypes.func.isRequired,
+  onSelect: PropTypes.func.isRequired,
+  children: PropTypes.shape([]).isRequired,
 };
 
 export default ProductItem;
