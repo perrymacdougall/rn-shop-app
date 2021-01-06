@@ -9,6 +9,7 @@ import ProductsOverviewScreen from '../screens/shop/ProductsOverviewScreen';
 import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
 import CartScreen from '../screens/shop/CartScreen';
 import OrdersScreen from '../screens/shop/OrdersScreen';
+import UserProductsScreen from '../screens/user/UserProductsScreen';
 import Colors from '../constants/Colors';
 
 const Stack = createStackNavigator();
@@ -65,6 +66,20 @@ const OrdersNavigator = () => {
   );
 };
 
+const AdminNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={defaultNavOptions}>
+      <Stack.Screen
+        name="Orders"
+        component={UserProductsScreen}
+        options={{
+          title: 'Add Product',
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const ShopNavigator = () => {
   return (
     <NavigationContainer>
@@ -92,6 +107,19 @@ const ShopNavigator = () => {
             drawerIcon: ({ color }) => (
               <Ionicons
                 name={Platform.OS === 'android' ? 'md-list' : 'ios-list'}
+                size={23}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Admin"
+          component={AdminNavigator}
+          options={{
+            drawerIcon: ({ color }) => (
+              <Ionicons
+                name={Platform.OS === 'android' ? 'md-create' : 'ios-create'}
                 size={23}
                 color={color}
               />
