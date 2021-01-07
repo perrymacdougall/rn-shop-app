@@ -10,6 +10,7 @@ import ProductDetailScreen from '../screens/shop/ProductDetailScreen';
 import CartScreen from '../screens/shop/CartScreen';
 import OrdersScreen from '../screens/shop/OrdersScreen';
 import UserProductsScreen from '../screens/user/UserProductsScreen';
+import EditProductScreen from '../screens/user/EditProductScreen';
 import Colors from '../constants/Colors';
 
 const Stack = createStackNavigator();
@@ -70,10 +71,17 @@ const AdminNavigator = () => {
   return (
     <Stack.Navigator screenOptions={defaultNavOptions}>
       <Stack.Screen
-        name="Orders"
+        name="Add"
         component={UserProductsScreen}
         options={{
           title: 'Add Product',
+        }}
+      />
+      <Stack.Screen
+        name="EditProduct"
+        component={EditProductScreen}
+        options={{
+          title: 'Edit Product',
         }}
       />
     </Stack.Navigator>
