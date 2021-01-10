@@ -74,7 +74,7 @@ const AdminNavigator = () => {
         name="Add"
         component={UserProductsScreen}
         options={{
-          title: 'Add Product',
+          title: 'Inventory',
         }}
       />
       <Stack.Screen
