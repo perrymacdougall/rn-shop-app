@@ -80,9 +80,9 @@ const AdminNavigator = () => {
       <Stack.Screen
         name="EditProduct"
         component={EditProductScreen}
-        options={{
-          title: 'Edit Product',
-        }}
+        options={({ route }) => ({
+          title: route.params?.productId ? 'Edit Product' : 'Add Product',
+        })}
       />
     </Stack.Navigator>
   );

@@ -92,7 +92,7 @@ ProductItem.propTypes = {
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   onSelect: PropTypes.func.isRequired,
-  children: PropTypes.array.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default ProductItem;
