@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View,
   ScrollView,
@@ -47,19 +47,13 @@ const EditProductScreen = ({ navigation, route }) => {
     editedProduct ? editedProduct.description : ''
   );
 
+  const submitHandler = useCallback(() => {
+    console.log('Submitting');
+  }, []);
+
   React.useLayoutEffect(() => {
+    navigation.setParams({ submit: submitHandler });
     navigation.setOptions({
-      //   headerLeft: () => (
-      //     <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-      //       <Item
-      //         title="Menu"
-      //         iconName={Platform.OS === 'android' ? 'md-menu' : 'ios-menu'}
-      //         onPress={() => {
-      //           navigation.toggleDrawer();
-      //         }}
-      //       />
-      //     </HeaderButtons>
-      //   ),
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
           <Item
@@ -67,14 +61,12 @@ const EditProductScreen = ({ navigation, route }) => {
             iconName={
               Platform.OS === 'android' ? 'md-checkmark' : 'ios-checkmark'
             }
-            onPress={() => {
-              navigation.navigate('EditProduct');
-            }}
+            onPress={submitHandler}
           />
         </HeaderButtons>
       ),
     });
-  }, [navigation]);
+  }, [navigation, submitHandler]);
 
   return (
     <ScrollView>
