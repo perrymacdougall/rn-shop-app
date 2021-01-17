@@ -59,6 +59,7 @@ const EditProductScreen = ({ navigation, route }) => {
         productActions.createProduct(title, description, imageUrl, +price)
       );
     }
+    navigation.goBack();
   }, [dispatch, prodId, title, description, imageUrl, price]);
 
   React.useLayoutEffect(() => {
