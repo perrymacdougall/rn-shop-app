@@ -132,33 +132,43 @@ const EditProductScreen = ({ navigation, route }) => {
     <ScrollView>
       <View style={styles.form}>
         <Input
+          id="title"
           label="Title"
           errorText="Please enter a valid title!"
           keyboardType="default"
           autoCapitalize="sentences"
           autoCorrect
           returnKeyType="Next"
-          onInputChange={inputChangeHandler.bind(this, 'title')}
+          onInputChange={inputChangeHandler}
           initialValue={editedProduct ? editedProduct.title : ''}
           initiallyValid={!!editedProduct}
+          required
         />
         <Input
+          id="imageUrl"
           label="Image Url"
           errorText="Please enter a valid image url!"
           keyboardType="default"
           returnKeyType="Next"
+          onInputChange={inputChangeHandler}
           initialValue={editedProduct ? editedProduct.imageUrl : ''}
           initiallyValid={!!editedProduct}
+          required
         />
         {editedProduct ? null : (
           <Input
+            id="price"
             label="Price"
             errorText="Please enter a valid price!"
             keyboardType="decimal-pad"
             returnKeyType="Next"
+            onInputChange={inputChangeHandler}
+            required
+            min={0.1}
           />
         )}
         <Input
+          id="description"
           label="Description"
           errorText="Please enter a valid description!"
           keyboardType="default"
@@ -166,8 +176,11 @@ const EditProductScreen = ({ navigation, route }) => {
           autoCorrect
           multiline
           numberOfLines={3}
+          onInputChange={inputChangeHandler}
           initialValue={editedProduct ? editedProduct.description : ''}
           initiallyValid={!!editedProduct}
+          required
+          minLength={5}
         />
       </View>
     </ScrollView>
