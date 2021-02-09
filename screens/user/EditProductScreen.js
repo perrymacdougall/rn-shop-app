@@ -14,23 +14,11 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import CustomHeaderButton from '../../components/UI/HeaderButton';
 import * as productActions from '../../store/actions/products';
+import Input from '../../components/UI/Input';
 
 const styles = StyleSheet.create({
   form: {
     margin: 20,
-  },
-  formControl: {
-    width: '100%',
-  },
-  label: {
-    fontFamily: 'open-sans-bold',
-    marginVertical: 8,
-  },
-  input: {
-    paddingHorizontal: 2,
-    paddingVertical: 5,
-    borderBottomColor: '#ccc',
-    borderBottomWidth: 1,
   },
 });
 
@@ -154,41 +142,29 @@ const EditProductScreen = ({ navigation, route }) => {
   return (
     <ScrollView>
       <View style={styles.form}>
-        <View style={styles.formControl}>
-          <Text style={styles.label}>Title</Text>
-          <TextInput
-            style={styles.input}
-            value={formState.inputValues.title}
-            onChangeText={textChangeHandler.bind(this, 'title')}
+        <Input
+          label="Title"
+          errorText="Please enter a valid title!"
+          keyboardType="default"
+          autoCapitalize="sentences"
+          autoCorrect
+          returnKeyType="Next"
+        />
+        <Input
+          label="Image Url"
+          errorText="Please enter a valid image url!"
+          keyboardType="default"
+          returnKeyType="Next"
+        />
+        {editedProduct ? null : (
+          <Input
+            label="Title"
+            errorText="Please enter a valid title!"
             keyboardType="default"
             autoCapitalize="sentences"
             autoCorrect
             returnKeyType="Next"
-            onEndEditing={() => console.log('onEndEditing')}
-            onSubmitEditing={() => console.log('onSubmitEnding')}
           />
-          {!formState.inputValidities.title && (
-            <Text>Please enter a valid title!</Text>
-          )}
-        </View>
-        <View style={styles.formControl}>
-          <Text style={styles.label}>Image URL</Text>
-          <TextInput
-            style={styles.input}
-            value={formState.inputValues.imageUrl}
-            onChangeText={textChangeHandler.bind(this, 'imageUrl')}
-          />
-        </View>
-        {editedProduct ? null : (
-          <View style={styles.formControl}>
-            <Text style={styles.label}>Price</Text>
-            <TextInput
-              style={styles.input}
-              value={formState.inputValues.price}
-              onChangeText={textChangeHandler.bind(this, 'price')}
-              keyboardType="decimal-pad"
-            />
-          </View>
         )}
         <View style={styles.formControl}>
           <Text style={styles.label}>Description</Text>
