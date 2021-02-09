@@ -70,16 +70,6 @@ const EditProductScreen = ({ navigation, route }) => {
     formIsValid: editedProduct ? true : false,
   });
 
-  // const [title, setTitle] = useState(editedProduct ? editedProduct.title : '');
-  // const [titleIsValid, setTitleIsValid] = useState(false);
-  // const [imageUrl, setImageUrl] = useState(
-  //   editedProduct ? editedProduct.imageUrl : ''
-  // );
-  // const [price, setPrice] = useState('');
-  // const [description, setDescription] = useState(
-  //   editedProduct ? editedProduct.description : ''
-  // );
-
   const submitHandler = useCallback(() => {
     if (!formState.formIsValid) {
       Alert.alert('Wrong input!', 'Please check the errors in the form.', [
@@ -126,18 +116,17 @@ const EditProductScreen = ({ navigation, route }) => {
     });
   }, [navigation, submitHandler]);
 
-  const textChangeHandler = (inputIdentifier, text) => {
-    let isValid = false;
-    if (text.trim().length > 0) {
-      isValid = true;
-    }
-    dispatchFormState({
-      type: FORM_INPUT_UPDATE,
-      value: text,
-      isValid: isValid,
-      input: inputIdentifier,
-    });
-  };
+  const inputChangeHandler = useCallback(
+    (inputIdentifier, inputValue, inputValidity) => {
+      dispatchFormState({
+        type: FORM_INPUT_UPDATE,
+        value: inputValue,
+        isValid: inputValidity,
+        input: inputIdentifier,
+      });
+    },
+    [dispatchFormState]
+  );
 
   return (
     <ScrollView>
@@ -149,31 +138,37 @@ const EditProductScreen = ({ navigation, route }) => {
           autoCapitalize="sentences"
           autoCorrect
           returnKeyType="Next"
+          onInputChange={inputChangeHandler.bind(this, 'title')}
+          initialValue={editedProduct ? editedProduct.title : ''}
+          initiallyValid={!!editedProduct}
         />
         <Input
           label="Image Url"
           errorText="Please enter a valid image url!"
           keyboardType="default"
           returnKeyType="Next"
+          initialValue={editedProduct ? editedProduct.imageUrl : ''}
+          initiallyValid={!!editedProduct}
         />
         {editedProduct ? null : (
           <Input
-            label="Title"
-            errorText="Please enter a valid title!"
-            keyboardType="default"
-            autoCapitalize="sentences"
-            autoCorrect
+            label="Price"
+            errorText="Please enter a valid price!"
+            keyboardType="decimal-pad"
             returnKeyType="Next"
           />
         )}
-        <View style={styles.formControl}>
-          <Text style={styles.label}>Description</Text>
-          <TextInput
-            style={styles.input}
-            value={formState.inputValues.description}
-            onChangeText={textChangeHandler.bind(this, 'description')}
-          />
-        </View>
+        <Input
+          label="Description"
+          errorText="Please enter a valid description!"
+          keyboardType="default"
+          autoCapitalize="sentences"
+          autoCorrect
+          multiline
+          numberOfLines={3}
+          initialValue={editedProduct ? editedProduct.description : ''}
+          initiallyValid={!!editedProduct}
+        />
       </View>
     </ScrollView>
   );
